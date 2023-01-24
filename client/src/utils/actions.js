@@ -1,3 +1,5 @@
+// using react-redux and @reduxjs/toolkit package, this file and the export are not used
+
 export const UPDATE_PRODUCTS = "UPDATE_PRODUCTS";
 
 export const ADD_TO_CART = "ADD_TO_CART";

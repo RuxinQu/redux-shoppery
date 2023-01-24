@@ -1,33 +1,25 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-// import { REMOVE_FROM_CART, UPDATE_CART_QUANTITY } from "../../utils/actions";
+import { useDispatch } from "react-redux";
+
+// import reducers from the cartSlice
 import { removeFromCart, updateCartQuantity } from "../../features/cartSlice";
 import { idbPromise } from "../../utils/helpers";
 
 const CartItem = ({ item }) => {
-  // const [, dispatch] = useStoreContext();
+  // use the dispatch method from react-redux package to access the reducer from the store object
   const dispatch = useDispatch();
 
   const handleRemoveFromCart = (item) => {
-    // dispatch({
-    //   type: REMOVE_FROM_CART,
-    //   _id: item._id,
-    // });
-    dispatch(removeFromCart({_id: item._id}));
+    dispatch(removeFromCart({ _id: item._id }));
     idbPromise("cart", "delete", { ...item });
   };
 
   const onChange = (e) => {
     const value = e.target.value;
     if (value === "0") {
-      dispatch(removeFromCart({_id: item._id}));
+      dispatch(removeFromCart({ _id: item._id }));
       idbPromise("cart", "delete", { ...item });
     } else {
-      // dispatch({
-      //   type: UPDATE_CART_QUANTITY,
-      //   _id: item._id,
-      //   purchaseQuantity: parseInt(value),
-      // });
       dispatch(
         updateCartQuantity({ ...item, purchaseQuantity: parseInt(value) })
       );
