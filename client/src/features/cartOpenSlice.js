@@ -7,7 +7,7 @@ export const cartOpenSlice = createSlice({
   reducers: {
     // createSlice use immuter so the Array.push method won't change the current state
     toggleCart: (state, actions) => {
-      state.cartOpen === !state.cartOpen;
+      return state = !state;
     },
   },
 });
