@@ -18,6 +18,9 @@ export default configureStore({
   },
 });
 
+//=====================================================================================
+// using react-redux and @reduxjs/toolkit package, the code below isn't used
+
 // import React, { createContext, useContext } from "react";
 // import { useProductReducer } from "./reducers";
 

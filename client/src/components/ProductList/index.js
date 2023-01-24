@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import ProductItem from "../ProductItem";
-// import { useStoreContext } from '../../utils/GlobalState';
-// import { UPDATE_PRODUCTS } from '../../utils/actions';
 import { updateProducts, selectProducts } from "../../features/productSlice";
 import { selectCurrentCategory } from "../../features/currentCategorySlice";
 import { useQuery } from "@apollo/client";
@@ -11,40 +9,34 @@ import { idbPromise } from "../../utils/helpers";
 import spinner from "../../assets/spinner.gif";
 
 function ProductList() {
-  // const [state, dispatch] = useStoreContext();
+  // get the currentCategory state and products state
   const currentCategory = useSelector(selectCurrentCategory);
   const products = useSelector(selectProducts);
   const dispatch = useDispatch();
-  // const { currentCategory } = state;
 
   const { loading, data } = useQuery(QUERY_PRODUCTS);
 
   useEffect(() => {
     if (data) {
-      // dispatch({
-      //   type: UPDATE_PRODUCTS,
-      //   products: data.products,
-      // });
+      // if data is returned from the query, trigger the updateProducts reducer 
       dispatch(updateProducts(data.products));
       data.products.forEach((product) => {
         idbPromise("products", "put", product);
       });
     } else if (!loading) {
+      // if usequery is still loading, get the products from idb
       idbPromise("products", "get").then((products) => {
-        // dispatch({
-        //   type: UPDATE_PRODUCTS,
-        //   products: products,
-        // });
         dispatch(updateProducts(products));
       });
     }
   }, [data, loading, dispatch]);
 
   function filterProducts() {
+    // is user didn't select any category, return all products
     if (!currentCategory) {
       return products;
     }
-
+    // otherwise only return the products under currentCategory
     return products.filter(
       (product) => product.category._id === currentCategory
     );
@@ -55,6 +47,7 @@ function ProductList() {
       <h2>Our Products:</h2>
       {products.length ? (
         <div className="flex-row">
+          {/* pass the product to the productItem component */}
           {filterProducts().map((product) => (
             <ProductItem
               key={product._id}

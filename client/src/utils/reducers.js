@@ -1,6 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
+// using react-redux and @reduxjs/toolkit package, the code in this file isn't used
 
-// import { useReducer } from 'react';
+import { useReducer } from "react";
 import {
   UPDATE_PRODUCTS,
   ADD_TO_CART,
@@ -11,19 +11,10 @@ import {
   UPDATE_CURRENT_CATEGORY,
   CLEAR_CART,
   TOGGLE_CART,
-} from './actions';
+} from "./actions";
 
-
-
-
-
-
-
-// TODO: To get a better understand of how a reducer works - add comments to the various actions in the reducer
 export const reducer = (state, action) => {
   switch (action.type) {
-    // TODO: Add a comment describing the functionality of the UPDATE_PRODUCTS case
-    // Your comment here
     case UPDATE_PRODUCTS:
       return {
         ...state,
@@ -42,8 +33,6 @@ export const reducer = (state, action) => {
         ...state,
         cart: [...state.cart, ...action.products],
       };
-    // TODO: Add a comment describing the functionality of the UPDATE_CART_QUANTITY case
-    // Your comment here
     case UPDATE_CART_QUANTITY:
       return {
         ...state,
@@ -56,8 +45,6 @@ export const reducer = (state, action) => {
         }),
       };
 
-    // TODO: Add a comment describing the functionality of the REMOVE_FROM_CART case
-    // Your comment here
     case REMOVE_FROM_CART:
       let newState = state.cart.filter((product) => {
         return product._id !== action._id;
@@ -94,8 +81,6 @@ export const reducer = (state, action) => {
         currentCategory: action.currentCategory,
       };
 
-    // TODO: Add a comment describing what the default case is for
-    // Your comment here
     default:
       return state;
   }

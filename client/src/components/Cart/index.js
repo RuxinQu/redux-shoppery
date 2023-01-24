@@ -2,29 +2,26 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { loadStripe } from "@stripe/stripe-js";
-import dotenv from "dotenv";
-
 import { useLazyQuery } from "@apollo/client";
+// import reducers from the cart slice and cartOpen slice
 import { addMultipleToCart, selectCart } from "../../features/cartSlice";
 import { toggleCart, selectCartOpen } from "../../features/cartOpenSlice";
 import { QUERY_CHECKOUT } from "../../utils/queries";
 import { idbPromise } from "../../utils/helpers";
 import CartItem from "../CartItem";
 import Auth from "../../utils/auth";
-// import { useStoreContext } from '../../utils/GlobalState';
-// import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from '../../utils/actions';
 import "./style.css";
-dotenv.config();
 
 const stripePromise = loadStripe("pk_test_TYooMQauvdEDq54NiTphI7jx");
 const Cart = () => {
+  // to get the current state for cart and cartOpen
   const cart = useSelector(selectCart);
   const cartOpen = useSelector(selectCartOpen);
   const dispatch = useDispatch();
 
-  // const [state, dispatch] = useStoreContext();
   const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
 
+  // function provided by stripe: When the customer completes their purchase, they are redirected back to the website.
   useEffect(() => {
     if (data) {
       stripePromise.then((res) => {
@@ -33,6 +30,7 @@ const Cart = () => {
     }
   }, [data]);
 
+  // to get the items from cart from idb
   useEffect(() => {
     async function getCart() {
       const cart = await idbPromise("cart", "get");
@@ -44,6 +42,7 @@ const Cart = () => {
     }
   }, [cart.length, dispatch]);
 
+  // calculate total price in the cart
   function calculateTotal() {
     let sum = 0;
     cart.forEach((item) => {
@@ -70,6 +69,7 @@ const Cart = () => {
     dispatch(toggleCart());
   }
 
+  // if the cart isn't expanded, show the icon below
   if (!cartOpen) {
     return (
       <div className="cart-closed" onClick={toggleCartOpen}>
@@ -95,6 +95,7 @@ const Cart = () => {
           <div className="flex-row space-between">
             <strong>Total: ${calculateTotal()}</strong>
 
+            {/* show checkout button only when user is loggin  */}
             {Auth.loggedIn() ? (
               <button onClick={submitCheckout}>Checkout</button>
             ) : (
