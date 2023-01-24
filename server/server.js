@@ -28,7 +28,9 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
 
-
+app.get('/service-worker.js', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/build/service-worker.js'));
+});
 // Create a new instance of an Apollo server with the GraphQL schema
 const startApolloServer = async (typeDefs, resolvers) => {
   await server.start();
