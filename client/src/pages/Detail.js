@@ -4,8 +4,12 @@ import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 
 import Cart from "../components/Cart";
-
-import { updateCartQuantity, selectCart } from "../features/cartSlice";
+import {
+  updateCartQuantity,
+  removeFromCart,
+  addToCart,
+  selectCart,
+} from "../features/cartSlice";
 import { updateProducts, selectProducts } from "../features/productSlice";
 import { QUERY_PRODUCTS } from "../utils/queries";
 import { idbPromise } from "../utils/helpers";
@@ -42,7 +46,7 @@ function Detail() {
     }
   }, [products, data, loading, dispatch, id]);
 
-  const addToCart = () => {
+  const handleAddToCart = () => {
     const itemInCart = cart.find((cartItem) => cartItem._id === id);
     if (itemInCart) {
       dispatch(
@@ -63,7 +67,7 @@ function Detail() {
     }
   };
 
-  const removeFromCart = () => {
+  const handleRemoveFromCart = () => {
     // to remove the product from the cart and the cache
     dispatch(removeFromCart(currentProduct));
     idbPromise("cart", "delete", { ...currentProduct });
@@ -81,10 +85,10 @@ function Detail() {
 
           <p>
             <strong>Price:</strong>${currentProduct.price}{" "}
-            <button onClick={addToCart}>Add to Cart</button>
+            <button onClick={handleAddToCart}>Add to Cart</button>
             <button
               disabled={!cart.find((p) => p._id === currentProduct._id)}
-              onClick={removeFromCart}
+              onClick={handleRemoveFromCart}
             >
               Remove from Cart
             </button>
