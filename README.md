@@ -1,4 +1,4 @@
-# Redux Store
+# Redux Shoppery
 
 ![react](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![react-router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
@@ -10,13 +10,15 @@
 ![stripe](https://img.shields.io/badge/Stripe-626CD9?style=for-the-badge&logo=Stripe&logoColor=white)
 ![heroku](https://img.shields.io/badge/Heroku-430098?style=for-the-badge&logo=heroku&logoColor=white)
 ![bootstrap](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white)
-## Description
-View the deployed application: https://redux-store-rq.herokuapp.com/
 
+## Description
+
+View the deployed application: https://redux-store-rq.herokuapp.com/
 
 This PWA project is a e-commerce platform. The frontend is built with react and redux. The backend is built with express and mongoDB.GraphQL and Apollo server 3.0 are used for querying data. The data is also saved in IndexDB database on client side.
 
 ## Table of Contents
+
 - [Installation](#installation)
 - [Usage](#usage)
 - [Technologies Used](#technologies-used)
@@ -37,7 +39,7 @@ This PWA project is a e-commerce platform. The frontend is built with react and 
 5. To simulate a successful payment, **use test cards from the following list**. The billing country for each test card is set to the United States.
 
 | brand      | number           | cvc          | date            |
-|------------|------------------|--------------|-----------------|
+| ---------- | ---------------- | ------------ | --------------- |
 | Visa       | 4242424242424242 | Any 3 digits | Any future date |
 | Mastercard | 5555555555554444 | Any 3 digits | Any future date |
 | Discover   | 6011111111111117 | Any 3 digits | Any future date |
@@ -49,6 +51,7 @@ The animations below shows the app's appearance and functionality:
 ![demo](./assets/22-state-homework-demo-03.gif)
 
 ## Technologies Used
+
 - [react](https://reactjs.org)
 - [redux-toolkit](https://redux-toolkit.js.org)
 - [graphQL](https://graphql.org)
@@ -60,6 +63,7 @@ The animations below shows the app's appearance and functionality:
 - [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
 - [jwt-decode](https://www.npmjs.com/package/jwt-decode)
 - [indexedDB](https://www.npmjs.com/package/idb)
+
 ## Question
 
- Contact me via: ruxinqu@gmail.com if you have addition questions.
+Contact me via: ruxinqu@gmail.com if you have addition questions.
